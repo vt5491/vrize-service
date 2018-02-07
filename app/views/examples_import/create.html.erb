@@ -1,0 +1,27 @@
+<p>
+  hi2 from examples_import create.html.erb
+<p>
+  <%# button_to [:write_to_db, @user], action: "/examples_import/write" %>
+  button goes here:
+  <%= button_to "Write", { action: "write" } %>
+<p>
+  <table>
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Keyword 1</th>
+    <th>Keyword 2</th>
+  </tr>
+  <% counter=1%>
+  <% for ex in @exampleImport.examples %>
+    <tr>
+      <td><%= counter %>.</td>
+      <td><%= ex[:name] %></td>
+      <td><%= ex[:category] %></td>
+      <td><%= ex[:keyword_1] %></td>
+      <td><%= ex[:keyword_2] %></td>
+    </tr>
+    <% counter=counter+1 %>
+  <% end %>
+</table>

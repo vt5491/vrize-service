@@ -1,0 +1,9 @@
+<p>
+  hi from export_import index view.
+<p>
+<p>
+  <%# button_to "Example", :method=> @example.extract %>
+
+<%= form_tag @exampleImport, method: :post do %>
+  <%= submit_tag 'Extract' %>
+<% end %>
