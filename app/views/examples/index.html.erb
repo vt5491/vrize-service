@@ -1,7 +1,15 @@
 <p id="notice"><%= notice %></p>
 <p>
 <%= form_tag '/examples', method: :get do %>
+  <%= label_tag(:name, "Name:") %>
   <%= text_field_tag :name, params[:name] %>
+  <%= label_tag(:cat, "Category:") %>
+  <%# text_field_tag :cat, params[:cat] %>
+  <%# select_tag :cat, [
+    ['webgl','webgl'],['canvas','canvas'],['misc','misc'], ['webvr','webvr']
+  ] %>
+  <%= select_tag "category", options_for_select([ "any", "webgl","canvas", "misc", "webvr" ], "any") %>
+  <p>
   <%= submit_tag 'Search', name: nil %>
 <% end %>
 <p>
