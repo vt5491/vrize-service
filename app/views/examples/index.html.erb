@@ -1,14 +1,18 @@
 <p id="notice"><%= notice %></p>
 <p>
+<%# vt add %>
+<%# stylesheet_link_tag 'edit' if params[:action] == 'edit' %>
+<%# stylesheet_link_tag 'edit' %>
+<%# vt end %>
+
 <%= form_tag '/examples', method: :get do %>
   <%= label_tag(:name, "Name:") %>
   <%= text_field_tag :name, params[:name] %>
   <%= label_tag(:cat, "Category:") %>
-  <%# text_field_tag :cat, params[:cat] %>
-  <%# select_tag :cat, [
-    ['webgl','webgl'],['canvas','canvas'],['misc','misc'], ['webvr','webvr']
-  ] %>
-  <%= select_tag "category", options_for_select([ "any", "webgl","canvas", "misc", "webvr" ], "any") %>
+  <%= select_tag "category", options_for_select([ "any", "webgl","canvas", "misc", "webvr" ], params[:category] || "any") %>
+     <%# :selected => params[:category] %>
+  <%= label_tag(:lifted, "Lifted:") %>
+  <%= select_tag "lifted", options_for_select([ "any", true, false], params[:lifted] || "any") %>
   <p>
   <%= submit_tag 'Search', name: nil %>
 <% end %>
@@ -20,8 +24,11 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>category</th>
-      <th colspan="3"></th>
+      <th class="left-align">category</th>
+      <th class="left-align">keyword_1</th>
+      <th class="left-align">keyword_2</th>
+      <th class="left-align">lifted</th>
+      <th colspan="6"></th>
     </tr>
   </thead>
 
@@ -29,7 +36,10 @@
     <% @examples.each do |example| %>
       <tr>
         <td><%= example.name %></td>
-        <td><%= example.category %></td>
+        <td class="left-align"><%= example.category %></td>
+        <td><%= example.keyword_1 %></td>
+        <td><%= example.keyword_2 %></td>
+        <td><%= example.lifted %></td>
         <td><%= link_to 'Show', example %></td>
         <td><%= link_to 'Edit', edit_example_path(example) %></td>
         <td><%= link_to 'Destroy', example, method: :delete, data: { confirm: 'Are you sure?' } %></td>

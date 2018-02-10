@@ -6,6 +6,9 @@ class Example < ApplicationRecord
   # load 'example_extractor'
   # attr_accessor :name
   # attr_accessor :category
+  # attr_accessor :keyword_1
+  # attr_accessor :keyword_2
+  # attr_accessor :lifted
 
   def do_it
     p "Example.do_it: entered"

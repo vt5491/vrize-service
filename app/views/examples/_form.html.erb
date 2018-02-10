@@ -21,6 +21,26 @@
     <%= form.text_field :category, id: :example_category %>
   </div>
 
+  <div class="field">
+    <%= form.label :keyword_1 %>
+    <%= form.text_field :keyword_1, id: :example_keyword_1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :keyword_2 %>
+    <%= form.text_field :keyword_2, id: :example_keyword_2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lifted %>
+    <%# form.text_field :lifted, id: :example_lifted %>
+    <%# form.check_box :lifted, {}, true, false %>
+    <%= form.check_box :lifted %> 
+  </div>
+
+  <%# note: lifted_at is now under trigger control. %>
+  <%# this is not something the user should be responsible for, only code %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

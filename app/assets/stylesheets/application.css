@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+/*vt add */
+.center {
+    text-align: center;
+}
+.left-align {
+    text-align: left;
+}
+/*vt end */

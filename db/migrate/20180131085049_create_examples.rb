@@ -1,10 +1,8 @@
 class CreateExamples < ActiveRecord::Migration[5.1]
   def change
     create_table :examples do |t|
-      t.string :name
-      t.string :path
+      t.string :name, :default => ''
 
-      #t.timestamps, :null => false
       #t.datetime :created_at, :default => 'now()' 
       #t.datetime :updated_at, :default => 'now()'
       #t.timestamps, default: -> { 'CURRENT_TIMESTAMP' }

@@ -13,10 +13,20 @@ class ExamplesController < ApplicationController
     # else
     #   Example.all
     # end
+    # query = Project.order(:name)
+    query = Example
+    query = Example.where("name LIKE (?)", "%#{params[:name]}%") if params[:name].present?
+    query = query.where("category = (?)", params[:category]) if params[:category].present? && params[:category] != "any"
+    query = query.where("lifted = (?)", (params[:lifted] == 'true' ? 1 : 0)) if params[:lifted].present? && params[:lifted] != "any"
 
+    @examples = if query.class.to_s == "Example::ActiveRecord_Relation"
+      query
+    else
+      Example.all
+=begin
     p "params[:name]=#{params[:name]}"
 
-    cat_q = nil 
+    cat_q = nil
     if params[:category] && params[:category] != 'any'
       # cat_q = 'category = ?', "%#{params[:category]}%"
       # cat_q = "category = #{params[:category]}"
@@ -25,7 +35,7 @@ class ExamplesController < ApplicationController
       cat_q = "category = '#{clean_category}'"
     end
 
-    name_q = nil 
+    name_q = nil
     if params[:name]
       # name_q += 'category = ?', "%#{params[:category]}%"
       # name_q = "name LIKE #{params[:name]}"
@@ -36,7 +46,7 @@ class ExamplesController < ApplicationController
       name_q = "name LIKE '%#{clean_name}%'"
     end
 
-    q = nil 
+    q = nil
     if cat_q && name_q
       q = name_q + " AND " + cat_q
     elsif cat_q
@@ -51,6 +61,7 @@ class ExamplesController < ApplicationController
       Example.where(q)
     else
       Example.all
+=end
     end
 
   end
@@ -89,6 +100,8 @@ class ExamplesController < ApplicationController
   # PATCH/PUT /examples/1.json
   def update
     respond_to do |format|
+      # example_params = {"lifted"=>"1"}
+      # p "vt.Patch.update: example_params=#{example_params}"
       if @example.update(example_params)
         format.html { redirect_to @example, notice: 'Example was successfully updated.' }
         format.json { render :show, status: :ok, location: @example }
@@ -142,8 +155,9 @@ class ExamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def example_params
-      # params.require(:example).permit(:name, :path)
-      # params.require(:example).permit(:name, :category)
-      params.permit(:name, :category)
+      params.require(:example).permit(:name, :category, :keyword_1, :keyword_2, :lifted)
+      # params.require(:example).permit(:name, :category, :keyword_1, :keyword_2, :lifted)
+      # params.permit(:name, :category)
+      # params.permit(:name, :category, :keyword_1, :keyword_2, :lifted)
     end
 end

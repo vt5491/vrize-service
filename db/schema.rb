@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203060827) do
+ActiveRecord::Schema.define(version: 20180210033040) do
 
   create_table "examples", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
-    t.string "category"
-    t.string "keyword_1"
-    t.string "keyword_2"
-    t.boolean "lifted"
-    t.integer "lift_failure_id"
-    t.integer "likes"
+    t.string "name", default: ""
+    t.string "category", default: ""
+    t.string "keyword_1", default: ""
+    t.string "keyword_2", default: ""
+    t.boolean "lifted", default: false
+    t.integer "lift_failure_id", default: 0
+    t.integer "likes", default: 0
     t.integer "avg_rating"
     t.datetime "lifted_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
