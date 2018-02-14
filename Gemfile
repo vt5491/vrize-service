@@ -12,7 +12,7 @@ gem 'rails', '~> 5.1.4'
 #gem 'sqlite3'
 # Use postgresql as the database for Active Record
 #gem 'pg'
-gem 'pg', '0.21.0'
+#gem 'pg', '0.21.0'
 # use mysql since postgres doens't allow positional column additions
 gem 'mysql2', '>=0.4.10'
 # Use Puma as the app server

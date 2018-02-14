@@ -10,20 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180210033040) do
+ActiveRecord::Schema.define(version: 20180214073944) do
 
-  create_table "examples", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "examples", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name", default: ""
     t.string "category", default: ""
     t.string "keyword_1", default: ""
     t.string "keyword_2", default: ""
     t.boolean "lifted", default: false
     t.integer "lift_failure_id", default: 0
-    t.integer "likes", default: 0
-    t.integer "avg_rating"
     t.datetime "lifted_at"
-    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "created_at"
     t.timestamp "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+  end
+
+  create_table "stats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint "example_id"
+    t.integer "likes"
+    t.float "avg_rating", limit: 24
+    t.integer "impressions"
+    t.integer "clicks"
+    t.integer "code_views"
+    t.datetime "created_at"
+    t.timestamp "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["example_id"], name: "index_stats_on_example_id"
   end
 
 end
