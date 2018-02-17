@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get 'search'
       get 'import'
       post 'import'
+      get 'all_lifted'
     end
   end
   #post 'home/action'
@@ -14,4 +15,9 @@ Rails.application.routes.draw do
       post 'write'
     end
   end
+  # resources :dummy do
+  #   collection do
+  #     get 'get_back'
+  #   end
+  # end
 end

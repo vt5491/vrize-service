@@ -146,6 +146,29 @@ class ExamplesController < ApplicationController
 
   end
   # end additional reset resources
+  # add some custom queries for threejsVrGallery
+  def all_lifted
+    query = Example
+    query = query.where("lifted=1")
+
+    @examples = query
+    respond_to do |format|
+      # format.html { @examples}
+      format.html { puts "hi from format.html"}
+      # format.json
+      # format.json {@examples.to_json}
+      # format.json { @examples}
+      format.json {
+        render json: @examples
+      }
+      # format.json { puts "hi from format.json"}
+      # format.json render :partial => "examples/show.json"
+      # format.json {:partial => "examples/show.json.jbuilder"}
+    end
+    # render :json => @projects, :include => tasks
+  end
+
+  # end custom queries
 
   private
     # Use callbacks to share common setup or constraints between actions.
