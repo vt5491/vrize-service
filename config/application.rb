@@ -20,6 +20,7 @@ module VrizeService
 
     # try to make it so when we access this service from a remote machine we don't
     # get cors issues
+    # vt: you can only add one route here.  To add others update 'application_controller.rb'
     config.action_dispatch.default_headers = {
       # 'Access-Control-Allow-Origin' => 'http://my-web-service-consumer-site.com',
       # Note: you need to specify the address of the client, not that of the rails server

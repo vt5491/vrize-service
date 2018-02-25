@@ -2,6 +2,10 @@ require 'active_record'
 
 class ExamplesController < ApplicationController
   before_action :set_example, only: [:show, :edit, :update, :destroy]
+  #vt add
+  # allow_cors :index, :other_methods
+  allow_cors :all_lifted
+  #vt end
 
   # GET /examples
   # GET /examples.json
