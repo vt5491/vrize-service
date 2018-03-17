@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
   #
   # allow_cors takes in arbitrarily many symbols representing actions that
   # CORS should be enabled for
+
+  # Note: this cors stuff has no effect. I think the problem might be that this
+  # needs to be added to 'config/application.rb', not 'ApplicaitonController'?
+  # Anyways, the cors middleware fixes the problem.  You should be able to
+  # delete this.
   def self.allow_cors(*methods)
     # before_filter :cors_before_filter, :only => methods
     before_action :cors_before_filter, :only => methods

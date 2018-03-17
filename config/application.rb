@@ -28,5 +28,12 @@ module VrizeService
       'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
     }
     #vt end
+    # cors support via middleware
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :put, :options]
+      end
+    end
   end
 end

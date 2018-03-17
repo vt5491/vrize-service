@@ -2,11 +2,11 @@ class ExamplesAddLiftedTrigger < ActiveRecord::Migration[5.1]
   def change
   end
   execute %{
-  DROP TRIGGER IF EXISTS `examples_lifted_at`
+  DROP TRIGGER IF EXISTS `examples_lifted_at_trigger`
   }
 
   execute %{ 
- CREATE TRIGGER lifted_trigger BEFORE UPDATE ON examples
+ CREATE TRIGGER examples_lifted_at_trigger BEFORE UPDATE ON examples
    FOR EACH ROW
    thisTrigger: BEGIN
      IF ((@TRIGGER_CHECKS = FALSE)
@@ -14,7 +14,7 @@ class ExamplesAddLiftedTrigger < ActiveRecord::Migration[5.1]
          THEN
            LEAVE thisTrigger;
      END IF;
-     IF NEW.lifted = 1 && OLD.lifted = 0 THEN
+     IF NEW.lifted = 1 THEN
        SET NEW.lifted_at = now();     
      ELSEIF NEW.lifted = 0 && OLD.lifted =1 THEN
        SET NEW.lifted_at = NULL;

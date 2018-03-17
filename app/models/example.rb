@@ -31,4 +31,14 @@ class Example < ApplicationRecord
       pp f
     }
   end
+
+  # def update(params)
+  #   # p "Example: now in update, params.lifted= #{params.lifted}, self.lifted=#{self.lifted}"
+  #   # p "Example: now in update, params.lifted= #{params.lifted}"
+  #   p "Example: now in update, params= #{params}"
+  #   # example = Example.find_by(id: example.id)
+  #   # example.lifted =
+  #   self.save
+  # end
+
 end
