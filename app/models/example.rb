@@ -2,6 +2,8 @@ require 'pp'
 require 'example_extractor'
 
 class Example < ApplicationRecord
+  # has_many :example_lift_reqs, dependent: :destroy
+  has_many :example_lift_reqs, :class_name => 'ExampleLiftReq'
   # require '../services/example_extractor'
   # load 'example_extractor'
   # attr_accessor :name

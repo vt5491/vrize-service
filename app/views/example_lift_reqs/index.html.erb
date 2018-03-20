@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Example Lift Reqs</h1>
+
+<table>
+  <thead>
+    <tr class='left-align'>
+      <th>req-id</th>
+      <th>example-id</th>
+      <th>name</th>
+      <th>lifted</th>
+      <th>lifted-at</th>
+      <th>req-updated-at</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @example_lift_reqs.each do |example_lift_req| %>
+      <tr>
+        <td><%= example_lift_req.id %></td>
+        <% if true %>
+        <td><%= example_lift_req.example.id %></td>
+        <td><%= example_lift_req.example.name %></td>
+        <td><%= example_lift_req.example.lifted %></td>
+        <td><%= example_lift_req.example.lifted_at %></td>
+        <%# localize(scenario.created_at, :format => :long) %>
+        <%# <% @pacific_time = Time.parse(DateTime.strptime(example_lift_req.updated_at,'%s'))%> %>
+        <%# <td><%= @pacific_time %></td> %>
+        <td><%= to_pt(example_lift_req.updated_at) %></td>
+        <% end %>
+        <td><%= link_to 'Show', example_lift_req %></td>
+        <td><%= link_to 'Edit', edit_example_lift_req_path(example_lift_req) %></td>
+        <td><%= link_to 'Destroy', example_lift_req, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Example Lift Req', new_example_lift_req_path %>

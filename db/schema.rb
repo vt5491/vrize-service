@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180214073439) do
+ActiveRecord::Schema.define(version: 20180320022851) do
+
+  create_table "example_lift_reqs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "example_id"
+    t.integer "lift_failure_code", default: 0
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.timestamp "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["example_id"], name: "index_example_lift_reqs_on_example_id"
+  end
 
   create_table "examples", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: ""
@@ -36,4 +44,5 @@ ActiveRecord::Schema.define(version: 20180214073439) do
     t.index ["example_id"], name: "index_stats_on_example_id"
   end
 
+  add_foreign_key "example_lift_reqs", "examples"
 end

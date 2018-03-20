@@ -1,0 +1,31 @@
+<h1>Lifted Examples</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="left-align">category</th>
+      <th class="left-align">keyword_1</th>
+      <th class="left-align">keyword_2</th>
+      <th class="left-align">lifted</th>
+      <th class="left-align">id</th>
+      <th colspan="6"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @examples.each do |example| %>
+      <tr>
+        <td><%= example.name %></td>
+        <td class="left-align"><%= example.category %></td>
+        <td><%= example.keyword_1 %></td>
+        <td><%= example.keyword_2 %></td>
+        <td><%= example.lifted %></td>
+        <td><%= example.id %></td>
+        <td><%= link_to 'Show', example %></td>
+        <td><%= link_to 'Edit', edit_example_path(example) %></td>
+        <td><%= link_to 'Destroy', example, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
