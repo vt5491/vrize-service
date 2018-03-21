@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lift Reqs</h1>
+
+<table>
+  <thead>
+    <tr class='left-align'>
+      <th>req-id</th>
+      <th>example-id</th>
+      <th>name</th>
+      <th>existing-lift-status</th>
+      <th>req-updated-at</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lift_reqs.each do |lift_req| %>
+      <tr>
+        <td><%= lift_req.id %></td>
+        <td><%= lift_req.example.id %></td>
+        <td><%= lift_req.example.name %></td>
+        <td><%= lift_req.example.lifted %></td>
+        <td><%= to_pt(lift_req.updated_at) %></td>
+        <td><%= link_to 'Show', lift_req %></td>
+        <td><%= link_to 'Edit', edit_lift_req_path(lift_req) %></td>
+        <td><%= link_to 'Destroy', lift_req, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lift Req', new_lift_req_path %>
