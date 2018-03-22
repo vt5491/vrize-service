@@ -4,19 +4,49 @@ class LiftReqsController < ApplicationController
   # GET /lift_reqs
   # GET /lift_reqs.json
   def index
-    @lift_reqs = LiftReq.all
-    p "index: lift_reqs[0]=#{@lift_reqs[0].example.name}"
+    # @lift_reqs = LiftReq.all
+    # @lift_reqs = LiftReq.all.select('lift_reqs.*, NULL as name, "bye" as def')
+    # return 'lift_req' plus all the info from a joined 'examples'
+    @lift_reqs = LiftReq.all.select('lift_reqs.*, NULL as example')
+    # @lift_reqs = LiftReq.all.select('lift_reqs.*, examples.* ')
+    # p "index: lift_reqs[0]=#{@lift_reqs[0].example.name}"
     # @lift_reqs[0].id = "hi"
+    # @lift_reqs[0].abc = "hi"
+    # p "index: lift_reqs[0].abc=#{@lift_reqs[0].abc}"
     # @lift_reqs[0].id = 17
     # json = @lift_reqs[0].as_json
     # json[0]['abc'] = true
     # json['abc'] = 'hi'
     # render json: json
-    @lift_reqs.each do |lr|
-      # lr['example'] = 'hi'
-      # lr.example.name = 'hi'
-      lr.id = lr.id + 1
+    # lift_reqs_xtra has some additional fields from examples added
+    # @lift_reqs_xtra = []
+    # @lift_reqs.each do |lr|
+    #   # lr['example'] = 'hi'
+    #   # lr.example.name = 'hi'
+    #   # lr.id = lr.id + 1
+    #   # lr.abc = "hello"
+    #   lr[:example] = {}
+    #   lr[:example][:name] = lr.example.name
+    #   # @lift_reqs_tmp << {lr => lr, :xyz => "xy"}
+    #   @lift_reqs_xtra << lr
+    # end
+    # p "index: lift_reqs[0].abc pt2=#{@lift_reqs[0].abc}"
+    # @lift_reqs.each do |lr|
+    #   lr.xyz = "gum"
+    #   @lift_reqs_tmp << lr
+    #   # @lift_reqs_tmp << {:lr => lr, :newatt => 'added string'}
+    # end
+    # @lift_reqs
+    # render json: {lift_reqs: @lift_reqs, example: {}finished: finished, unfinished: unfinished}
+    # p "respon_to=#{respond_to}"
+    respond_to do |format|
+      # format.html {render html: @lift_reqs}
+      # format.html { @lift_reqs}
+      # format.html { render @lift_reqs }
+      format.html
+      format.json {render json: @lift_reqs}
     end
+    # render json: @lift_reqs_xtra
   end
 
   # GET /lift_reqs/1
