@@ -170,7 +170,7 @@ class ExamplesController < ApplicationController
   # add some custom queries for threejsVrGallery
   def all_lifted
     query = Example
-    query = query.where("lifted=1")
+    query = query.where("lifted=1 AND lift_score=100")
 
     @examples = query
     respond_to do |format|
