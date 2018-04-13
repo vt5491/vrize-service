@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :lift_reqs
   resources :example_lift_reqs
+  resources :stats
   #resources :examples
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :examples do

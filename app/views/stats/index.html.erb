@@ -1,0 +1,22 @@
+<h1>Stats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th class="left-align">example_id</th>
+      <th class="left-align">likes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stats.each do |stat| %>
+      <tr>
+        <td><%= stat.id %></td>
+        <td class="left-align"><%= stat.example_id %></td>
+        <td><%= stat.likes %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

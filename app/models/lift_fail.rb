@@ -1,0 +1,2 @@
+class LiftFail < ApplicationRecord
+end

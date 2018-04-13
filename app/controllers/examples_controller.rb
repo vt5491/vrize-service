@@ -74,6 +74,8 @@ class ExamplesController < ApplicationController
   # GET /examples/1
   # GET /examples/1.json
   def show
+    p "ExamplesController.get params=#{params.inspect}"
+    # p "ExamplesController.update example_params=#{example_params.inspect}"
   end
 
   # GET /examples/new
@@ -170,7 +172,7 @@ class ExamplesController < ApplicationController
   # add some custom queries for threejsVrGallery
   def all_lifted
     query = Example
-    query = query.where("lifted=1 AND lift_score=100").sort_by(&:name)
+    query = query.where("lifted=1 AND lift_score=100 AND lift_failure_code=-1").sort_by(&:name)
 
     @examples = query
     respond_to do |format|
