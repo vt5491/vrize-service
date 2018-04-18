@@ -1,12 +1,12 @@
 class CreateStats < ActiveRecord::Migration[5.1]
   def change
     create_table :stats do |t|
-      t.belongs_to :example, index: true
-      t.integer :likes
+      t.belongs_to :example, index: true, foreign_key: "example_id"
+      t.integer :likes, :default => 0
       t.float :avg_rating
-      t.integer :impressions
-      t.integer :clicks
-      t.integer :code_views
+      t.integer :impressions, :default => 0
+      t.integer :clicks, :default => 0
+      t.integer :code_views, :default => 0
       t.datetime :created_at, :default => -> { 'CURRENT_TIMESTAMP' }
       t.timestamp :updated_at, :default => -> { 'CURRENT_TIMESTAMP'  }
     end

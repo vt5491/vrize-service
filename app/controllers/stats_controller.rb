@@ -1,14 +1,26 @@
 require 'active_record'
 
 class StatsController < ApplicationController
-  before_action :set_stat, only: [:show, :edit, :update, :destroy]
+  before_action :set_stat, only: [:show, :edit, :update, :destroy, :increment]
 
   # this is needed.  If not there, get a http 422
   allow_cors :put
   # GET /stats
   # GET /stats.json
   def index
-    @stats = Stat.all
+    # p "StatsController.index: params=#{params.inspect}"
+    # p "params['example_id']=#{params['example_id']}, params[:example_id]=#{params[:example_id]}"
+    if (params[:example_id])
+      @stats = Stat.where("example_id=?", params[:example_id])
+    else
+      @stats = Stat.all
+    end
+
+    respond_to do |format|
+      format.html {}
+      format.json {render :json => @stats }
+    end
+
   end
 
   # GET /stats/1
@@ -58,16 +70,23 @@ class StatsController < ApplicationController
       # following works if you send the body with 'application/json' but
       # do *not* jsonify it yourself on the client.
       # my_params = JSON.parse(request.body.read)
-      @stat.update(stat_params) # no work
+      # @stat.update(stat_params) # no work
 
-      p "StatsController.update my_params=#{my_params}"
-      @stat.update(my_params)
-      # if @stat.update(stat_params)
-      #   format.html {p "html-processing"; return "abc-html"}
-      #   format.json {p "json-processing"; return "abc-json"}
-      # else
-      #   p "StatsController: error in update"
-      # end
+      # p "StatsController.update my_params=#{my_params}"
+      # @stat.update(my_params)
+      # Stat.update(my_params)
+      # p "StatsController.update: params[:stat]=#{params[:stat]}"
+      # @stat.update(params[:stat])
+      if @stat.update(stat_params)
+        # format.html {p "html-processing"; return "abc-html"}
+        format.html { redirect_to @stat, notice: 'Stat was successfully updated.' }
+        # format.json {p "json-processing"; return "abc-json"}
+        format.json { render :show, status: :ok, location: @stat }
+      else
+        format.html { render :edit }
+        # p "StatsController: error in update"
+        format.json { render json: @stat.errors, status: :unprocessable_entity }
+      end
     # tmp_params = {params.id, request.body.read}
     end
       # if @stat.update(stat_params)
@@ -81,6 +100,38 @@ class StatsController < ApplicationController
     # end
   end
 
+  def increment
+    p "now in increment"
+    p "StatsController.increment params=#{params.inspect}"
+    # p "increment: parms[likes]=#{params['likes']}"
+    p "increment: @stat=#{@stat.inspect}"
+    # p "@stat[:impressions]=#{@stat[0]}"
+    inc_params = ActionController::Parameters.new
+
+    # inc_params[:likes] = 4
+    params.each do |col|
+      # byebug
+      if col.in?(%w(likes impressions clicks code_views))
+        # next if col == ('id') || col == 'stat'
+        p "col=#{col}, col.to_sym=#{col.to_sym}"
+        # p "@stat[:impressions]=#{@stat[:impressions]}"
+        p "@stat[metric]=#{@stat[col.to_sym]}"
+        inc_params[col.to_sym] = @stat[col.to_sym] + 1
+      end
+    end
+    p "inc_params=#{inc_params.inspect}"
+
+    respond_to do |format|
+      if @stat.update(inc_params.permit(:likes, :impressions, :clicks, :code_views))
+        format.html { redirect_to @stat, notice: 'Stat was successfully updated.' }
+        format.json { render :show, status: :ok, location: @stat }
+      else
+        format.html { render :edit }
+        format.json { render json: @stat.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # Since the client won't necessarily know if the stat record already exists,
   # we just make the client do POST requests and the server distinguishes between
   # a create or update.
@@ -91,15 +142,20 @@ class StatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stat
-      @stat = Stat.find(params[:id])
+      # @stat = Stat.find(params[:id])
+      if (params[:example_id])
+        @stat = Stat.where("example_id=?", params[:example_id]).first
+      else
+        @stat = Stat.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stat_params
-      # params.require(:stat).permit(:example_id, :likes, :avg_rating, :impressions, :clicks, :code_views)
+      params.require(:stat).permit(:example_id, :likes, :avg_rating, :impressions, :clicks, :code_views)
       # params.fetch(:stat, {}).permit(:example_id, :likes, :avg_rating, :impressions, :clicks, :code_views)
       # params.require(:example).permit(:name, :category, :keyword_1, :keyword_2, :lifted
       # params.permit(:name, :category)
-      params.permit(:id, :example_id, :likes, :avg_rating, :impressions, :clicks, :code_views)
+      # params.permit(:id, :example_id, :likes, :avg_rating, :impressions, :clicks, :code_views)
     end
 end

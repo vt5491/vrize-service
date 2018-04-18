@@ -51,11 +51,11 @@ ActiveRecord::Schema.define(version: 20180331034617) do
 
   create_table "stats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "example_id"
-    t.integer "likes"
+    t.integer "likes", default: 0
     t.float "avg_rating", limit: 24
-    t.integer "impressions"
-    t.integer "clicks"
-    t.integer "code_views"
+    t.integer "impressions", default: 0
+    t.integer "clicks", default: 0
+    t.integer "code_views", default: 0
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
     t.timestamp "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["example_id"], name: "index_stats_on_example_id"
@@ -64,4 +64,5 @@ ActiveRecord::Schema.define(version: 20180331034617) do
   add_foreign_key "example_lift_reqs", "examples"
   add_foreign_key "lift_fails", "examples"
   add_foreign_key "lift_reqs", "examples"
+  add_foreign_key "stats", "examples"
 end

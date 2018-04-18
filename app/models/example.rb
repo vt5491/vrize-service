@@ -3,7 +3,11 @@ require 'example_extractor'
 
 class Example < ApplicationRecord
   # has_many :example_lift_reqs, dependent: :destroy
-  has_many :example_lift_reqs, :class_name => 'ExampleLiftReq'
+  # has_many :example_lift_reqs, :class_name => 'ExampleLiftReq'
+  has_many :lift_reqs, :class_name => 'LiftReq'
+  has_one :stat, :class_name => 'Stat'
+
+  # accepts_nested_attributes_for :lift_reqs, :stat
   # require '../services/example_extractor'
   # load 'example_extractor'
   # attr_accessor :name

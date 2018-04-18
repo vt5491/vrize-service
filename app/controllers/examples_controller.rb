@@ -28,6 +28,7 @@ class ExamplesController < ApplicationController
       query
     else
       Example.all
+
 =begin
     p "params[:name]=#{params[:name]}"
 
@@ -197,6 +198,8 @@ class ExamplesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_example
       @example = Example.find(params[:id])
+      # @stat = @example.stat
+      # @lift_reqs = @example.lift_reqs
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
