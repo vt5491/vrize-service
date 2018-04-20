@@ -148,9 +148,30 @@ class ExamplesController < ApplicationController
 
   # add some additional rest resources
   def search
+    p "search.params=#{params.inspect}"
+    # p "params[:in]=#{params[:in]}, params['in']=#{params['in']}"
+    # query=nil
+
+    if (params[:col])
+      if( params[:in])
+        # query = Example.where("? IN (?)", params[:col], params[:in])
+        # @examples = Example.find_all_by_id(params[:in])
+        # p "now doing where"
+        # @examples = Example.where(:id => params[:in])
+        @examples = Example.where( params[:col].to_sym => params[:in])
+        # @examples = Example.where(:id => JSON.parse(params[:in]))
+      elsif (params[:eq])
+        @examples = Example.where( params[:col].to_sym => params[:eq])
+      end
+
+    end
+    # p "query=#{query}"
+    # @examples = query.to_a
+    p "example.length=#{@examples.length}"
     respond_to do |format|
       format.html { puts "hi from search"}
       # format.json { head :no_content }
+      format.json {@examples}
     end
   end
 

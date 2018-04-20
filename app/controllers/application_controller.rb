@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  p "vt: now in ApplicaitonController"
+  p "vt: now in ApplicationController"
   protect_from_forgery with: :exception
   # vt add
   # the following based on info at http://www.yihangho.com/rails-cross-origin-resource-sharing/
@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   # needs to be added to 'config/application.rb', not 'ApplicaitonController'?
   # Anyways, the cors middleware fixes the problem.  You should be able to
   # delete this.
+  # Nope, as currently implemented, I need both of these
   def self.allow_cors(*methods)
     # before_filter :cors_before_filter, :only => methods
     before_action :cors_before_filter, :only => methods
