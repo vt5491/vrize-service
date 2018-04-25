@@ -1,7 +1,7 @@
 require 'active_record'
 
 class StatsController < ApplicationController
-  before_action :set_stat, only: [:show, :edit, :update, :destroy, :increment]
+  before_action :set_stat, only: [:show, :edit, :update, :destroy]
 
   # this is needed.  If not there, get a http 422
   allow_cors :put
@@ -108,6 +108,8 @@ class StatsController < ApplicationController
     # p "@stat[:impressions]=#{@stat[0]}"
     inc_params = ActionController::Parameters.new
 
+    @stat = Stat.find_or_initialize_by(:example_id => params[:example_id])
+
     # inc_params[:likes] = 4
     params.each do |col|
       # byebug
@@ -122,6 +124,10 @@ class StatsController < ApplicationController
     p "inc_params=#{inc_params.inspect}"
 
     respond_to do |format|
+  #     Student.
+  # find_or_initialize_by(:user_id => current_user.id).
+  # update_attributes!(:department => 1)
+        # .update_attributes!(:department => 1)
       if @stat.update(inc_params.permit(:likes, :impressions, :clicks, :code_views))
         format.html { redirect_to @stat, notice: 'Stat was successfully updated.' }
         format.json { render :show, status: :ok, location: @stat }
