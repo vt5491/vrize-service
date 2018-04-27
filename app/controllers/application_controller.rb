@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  p "vt: now in ApplicationController"
+  #p "vt: now in ApplicationController"
   protect_from_forgery with: :exception
   # vt add
   # the following based on info at http://www.yihangho.com/rails-cross-origin-resource-sharing/

@@ -6,6 +6,7 @@ class Example < ApplicationRecord
   # has_many :example_lift_reqs, :class_name => 'ExampleLiftReq'
   has_many :lift_reqs, :class_name => 'LiftReq'
   has_one :stat, :class_name => 'Stat'
+  has_many :tags, :class_name => 'Tag'
 
   # accepts_nested_attributes_for :lift_reqs, :stat
   # require '../services/example_extractor'

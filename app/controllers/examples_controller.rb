@@ -21,7 +21,8 @@ class ExamplesController < ApplicationController
     query = Example
     query = Example.where("name LIKE (?)", "%#{params[:name]}%") if params[:name].present?
     query = query.where("category = (?)", params[:category]) if params[:category].present? && params[:category] != "any"
-    query = query.where("lifted = (?)", (params[:lifted] == 'true' ? 1 : 0)) if params[:lifted].present? && params[:lifted] != "any"
+    # query = query.where("lifted = (?)", (params[:lifted] == 'true' ? 1 : 0)) if params[:lifted].present? && params[:lifted] != "any"
+    query = query.where("lift_code >= (?)", (params[:lifted] == 'true' ? 1 : 0)) if params[:lifted].present? && params[:lifted] != "any"
     query = query.where("name in (?)", params[:fns]) if params[:fns].present?
 
     @examples = if query.class.to_s == "Example::ActiveRecord_Relation"
@@ -112,7 +113,10 @@ class ExamplesController < ApplicationController
       # p "vt.Patch.update: Time.now=#{Time.now}"
       # example_params['lifted_at'] = Time.now
       # example_params = {:def => 8}
+      # example_params = {:lift_code => 8}
       # example_params['lifted_at'] = 'hi'
+      # example_params['lift_code'] = 6
+      # example_params["abc"] = "bye"
       # example_params["abc"] = "bye"
       p "vt.Patch.update: example_params=#{example_params}"
       # p "vt.Patch.update: example_params[:lifted]=#{example_params[:lifted]}"
@@ -125,8 +129,9 @@ class ExamplesController < ApplicationController
       # 'lifted_at' to get updated, so we need "redundant" updates to actually
       # be performed. Probably not a good idea on a high-performance db, but
       # hopefully not too big a deal on this small db.
-      @example.touch
+      # @example.touch
       if @example.update(example_params)
+      # if @example.update(lift_code: 18, lift_score: 20)
         format.html { redirect_to @example, notice: 'Example was successfully updated.' }
         format.json { render :show, status: :ok, location: @example }
       else
@@ -194,7 +199,8 @@ class ExamplesController < ApplicationController
   # add some custom queries for threejsVrGallery
   def all_lifted
     query = Example
-    query = query.where("lifted=1 AND lift_score=100 AND lift_failure_code=-1").sort_by(&:name)
+    # query = query.where("lifted=1 AND lift_score=100 AND lift_failure_code=-1").sort_by(&:name)
+    query = query.where("lift_code>1 AND lift_score=100").sort_by(&:name)
 
     @examples = query
     respond_to do |format|
@@ -225,7 +231,8 @@ class ExamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def example_params
-      params.require(:example).permit(:name, :category, :keyword_1, :keyword_2, :lifted, :lifted_at)
+      # params.require(:example).permit(:name, :category, :keyword_1, :keyword_2, :lifted, :lifted_at)
+      params.require(:example).permit(:name, :category, :keyword_1, :keyword_2, :lift_code)
       # params.require(:example).permit(:name, :category, :keyword_1, :keyword_2, :lifted)
       # params.permit(:name, :category)
       # params.permit(:name, :category, :keyword_1, :keyword_2, :lifted)

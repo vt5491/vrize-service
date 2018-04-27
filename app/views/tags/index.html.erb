@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<p>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th class="left-align">tag</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tags.each do |example| %>
+      <tr>
+        <td><%= tag.id %></td>
+        <td><%= tag.tag %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

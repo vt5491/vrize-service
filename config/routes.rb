@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         put 'increment(/:id)' => 'stats#increment'
       end
     end
-    resources :lift_reqs do
+    resources :lift_reqs, :tags do
       collection do
       end
     end
