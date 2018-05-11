@@ -40,6 +40,9 @@ gem 'jbuilder', '~> 2.5'
 # 2018-03-14 : add Cors support
 gem 'rack-cors', :require => 'rack/cors'
 
+# 2018-05-07
+#gem "passenger", ">= 5.1.12", require: "phusion_passenger/rack_handler"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
