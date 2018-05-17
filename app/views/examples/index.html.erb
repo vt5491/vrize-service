@@ -27,9 +27,11 @@
       <th class="left-align">category</th>
       <th class="left-align">keyword_1</th>
       <th class="left-align">keyword_2</th>
-      <th class="left-align">lifted</th>
+      <th class="left-align">lift_code</th>
       <th class="left-align">id</th>
-      <th colspan="6"></th>
+      <th class="left-align">tag</th>
+      <th class="left-align">tag2</th>
+      <th colspan="8"></th>
     </tr>
   </thead>
 
@@ -40,8 +42,18 @@
         <td class="left-align"><%= example.category %></td>
         <td><%= example.keyword_1 %></td>
         <td><%= example.keyword_2 %></td>
-        <td><%= example.lifted %></td>
+        <td><%= example.lift_code %></td>
         <td><%= example.id %></td>
+        <% if false %>
+        <% if example.tags.length > 0  %>
+          <% example.tags.each do |tag| %>
+            <td><%= tag.tag %></td>
+          <% end %>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
+        <% end %>
         <td><%= link_to 'Show', example %></td>
         <td><%= link_to 'Edit', edit_example_path(example) %></td>
         <td><%= link_to 'Destroy', example, method: :delete, data: { confirm: 'Are you sure?' } %></td>

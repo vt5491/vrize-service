@@ -21,13 +21,8 @@
 </p>
 
 <p>
-  <strong>lifted:</strong>
-  <%= @example.lifted %>
-</p>
-
-<p>
-  <strong>lifted_at:</strong>
-  <%= @example.lifted_at %>
+  <strong>lift_code:</strong>
+  <%= @example.lift_code %>
 </p>
 
 <p>
@@ -43,6 +38,13 @@
 
   <strong>Id:</strong>
   <%= @example.id %>
+</p>
+
+</p>
+  <strong>Tags:</strong>
+  <% @example.tags.each do |tag| %>
+    <%= tag.tag %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_example_path(@example) %> |

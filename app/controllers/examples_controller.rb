@@ -30,45 +30,6 @@ class ExamplesController < ApplicationController
     else
       Example.all
 
-=begin
-    p "params[:name]=#{params[:name]}"
-
-    cat_q = nil
-    if params[:category] && params[:category] != 'any'
-      # cat_q = 'category = ?', "%#{params[:category]}%"
-      # cat_q = "category = #{params[:category]}"
-      # cat_q = sanitize_sql_array(["category=?", params[:category]])
-      clean_category = ActionController::Base.helpers.sanitize(params[:category])
-      cat_q = "category = '#{clean_category}'"
-    end
-
-    name_q = nil
-    if params[:name]
-      # name_q += 'category = ?', "%#{params[:category]}%"
-      # name_q = "name LIKE #{params[:name]}"
-      # name_q = "name LIKE " +  params[:name]
-      # name_q = ActiveRecord::Sanitizaion::sanitize_sql_array(["name LIKE ?", params[:name]])
-      # name_q = ActionController::Base.helpers.sanitize([ "name LIKE ?", params[:name] ])
-      clean_name = ActionController::Base.helpers.sanitize(params[:name])
-      name_q = "name LIKE '%#{clean_name}%'"
-    end
-
-    q = nil
-    if cat_q && name_q
-      q = name_q + " AND " + cat_q
-    elsif cat_q
-      q = cat_q
-    elsif name_q
-      q = name_q
-    end
-
-    p "q=#{q}"
-
-    @examples = if q
-      Example.where(q)
-    else
-      Example.all
-=end
     end
 
   end
@@ -209,11 +170,15 @@ class ExamplesController < ApplicationController
       # format.json
       # format.json {@examples.to_json}
       # format.json { @examples}
+=begin
       format.json {
         render json: @examples
       }
+=end
       # format.json { puts "hi from format.json"}
-      # format.json render :partial => "examples/show.json"
+      # format.json {render :partial => "examples/all_lifted.json" }
+      # format.json {render :partial => "examples/all_lifted.json" }
+      format.json {render "examples/all_lifted"}
       # format.json {:partial => "examples/show.json.jbuilder"}
     end
     # render :json => @projects, :include => tasks

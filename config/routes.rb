@@ -10,13 +10,17 @@ Rails.application.routes.draw do
       get 'import'
       post 'import'
       get 'all_lifted'
+      # this allows for urls like "examples/tags
+      resources :tags
     end
     resources :stats do
       collection do
         put 'increment(/:id)' => 'stats#increment'
       end
     end
+    # this allows for urls like "exampels/16/tags"
     resources :lift_reqs, :tags do
+    #resources :lift_reqs do
       collection do
       end
     end

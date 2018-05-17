@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180426230136) do
+ActiveRecord::Schema.define(version: 20180510071109) do
 
   create_table "example_lift_reqs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "example_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180426230136) do
     t.boolean "liftable"
     t.integer "lift_score", default: 0
     t.integer "lift_code", default: 0
+    t.string "img", default: ""
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
     t.timestamp "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
