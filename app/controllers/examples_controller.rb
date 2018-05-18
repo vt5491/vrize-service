@@ -141,21 +141,36 @@ class ExamplesController < ApplicationController
     end
   end
 
-  def import
-    @example = Example.new
+  # Search for examples by tag.  We could attempt to extend 'search' to handle
+  # this case, but since the tags are a separate table (but really an auxillary
+  # table to to the examples table and thus why we handle it here and not in the
+  # tags controller) we'll do it as a separate query.
+  def by_tag
+    p "ExamplesController.by_tag: entered, tag=#{params[:tag]}"
+    # Note: we simply tack on the tag as a virtual column for consistency's sake
+    @examples = Example.joins(:tags)
+      .where('tags.tag' => params[:tag])
+      .select("*,'#{params[:tag]}' as tag")
     respond_to do |format|
-      format.html { puts "hi from format"}
+      format.html { puts "hi from by_tag"}
       # format.json { head :no_content }
+      format.json {@examples}
     end
   end
-
-  def import_results
-    @example = Example.new
-    respond_to do |format|
-      format.html { puts "hi from format"}
-    end
-
-  end
+  # def import
+  #   @example = Example.new
+  #   respond_to do |format|
+  #     format.html { puts "hi from format"}
+  #     # format.json { head :no_content }
+  #   end
+  # end
+  #
+  # def import_results
+  #   @example = Example.new
+  #   respond_to do |format|
+  #     format.html { puts "hi from format"}
+  #   end
+  # end
   # end additional reset resources
   # add some custom queries for threejsVrGallery
   def all_lifted

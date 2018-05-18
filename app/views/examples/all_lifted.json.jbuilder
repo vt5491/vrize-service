@@ -15,7 +15,7 @@
 json.examples @examples do |example|
   #works
   # json.extract! example, :id, :name, :category, :tags
-  json.extract! example, :id, :name, :category
+  json.extract! example, :id, :name, :category, :lift_score
   # json.extract! example.tags, :tag
   json.tags example.tags do |tag|
     json.extract! tag, :tag

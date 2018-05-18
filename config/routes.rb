@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   resources :examples, shallow: true do
     collection do
       get 'search'
-      get 'import'
-      post 'import'
+      #get 'import'
+      #post 'import'
       get 'all_lifted'
+      get 'by_tag'
       # this allows for urls like "examples/tags
       resources :tags
     end

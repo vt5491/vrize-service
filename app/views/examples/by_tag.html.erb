@@ -1,0 +1,24 @@
+<h1>Examples By Tag</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>Name</th>
+      <th class="left-align">lift_score</th>
+      <th class="left-align">tag</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @examples.each do |example| %>
+      <tr>
+        <td><%= example.id %></td>
+        <td><%= example.name %></td>
+        <td class="left-align"><%= example.lift_score %></td>
+        <td><%= example.tags[0].tag %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
