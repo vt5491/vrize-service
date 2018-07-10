@@ -155,6 +155,7 @@ class ExamplesController < ApplicationController
       format.html { puts "hi from by_tag"}
       # format.json { head :no_content }
       format.json {@examples}
+      # format.json {@results}
     end
   end
   # def import
@@ -176,9 +177,20 @@ class ExamplesController < ApplicationController
   def all_lifted
     query = Example
     # query = query.where("lifted=1 AND lift_score=100 AND lift_failure_code=-1").sort_by(&:name)
-    query = query.where("lift_code>1 AND lift_score=100").sort_by(&:name)
+    # query = query.where("lift_code>1 AND lift_score=100").sort_by(&:name)
+    # query = query.where("lift_code>1 AND lift_score=100")
+    # .select('*, id as example_id')
+    # .sort_by(&:name)
+    #
+    # @examples = query
+    # @examples = query.select('*, id as example_id')
+    # @examples = Example.where("lift_code>1 AND lift_score=100")
+    # .select('*, id as example_id')
 
-    @examples = query
+    @examples = Example.where("lift_code>1 AND lift_score=100")
+    .select('*, id as example_id')
+    .sort_by(&:name)
+
     respond_to do |format|
       # format.html { @examples}
       format.html { puts "hi from format.html"}
@@ -193,7 +205,8 @@ class ExamplesController < ApplicationController
       # format.json { puts "hi from format.json"}
       # format.json {render :partial => "examples/all_lifted.json" }
       # format.json {render :partial => "examples/all_lifted.json" }
-      format.json {render "examples/all_lifted"}
+      #vtformat.json {render "examples/all_lifted"}
+      format.json {@examples}
       # format.json {:partial => "examples/show.json.jbuilder"}
     end
     # render :json => @projects, :include => tasks
