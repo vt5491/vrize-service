@@ -94,6 +94,13 @@ test:
 #
 production:
   <<: *default
-  database: rails_sb_production
-  username: rails_sb
-  password: <%= ENV['RAILS_SB_DATABASE_PASSWORD'] %>
+#  database: rails_sb_production
+#  username: rails_sb
+#  password: <%= ENV['RAILS_SB_DATABASE_PASSWORD'] %>
+#  adapter: mysql2
+#  encoding: utf8
+  database: vrize_service_production
+  host: localhost
+  pool: 5
+  username: <%= ENV['VRIZE_SERVICE_DB_USER'] %>
+  password: <%= ENV['VRIZE_SERVICE_DB_PASS'] %>

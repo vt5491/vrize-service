@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20180510071109) do
 
-  create_table "example_lift_reqs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "example_lift_reqs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "example_id"
     t.integer "lift_failure_code", default: 0
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20180510071109) do
     t.index ["example_id"], name: "index_example_lift_reqs_on_example_id"
   end
 
-  create_table "examples", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "examples", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name", default: ""
     t.string "category", default: ""
     t.string "keyword_1", default: ""
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20180510071109) do
     t.timestamp "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
-  create_table "lift_fails", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "lift_fails", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "example_id"
     t.string "note", default: ""
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
@@ -41,14 +41,14 @@ ActiveRecord::Schema.define(version: 20180510071109) do
     t.index ["example_id"], name: "index_lift_fails_on_example_id"
   end
 
-  create_table "lift_reqs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "lift_reqs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "example_id"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
     t.timestamp "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["example_id"], name: "index_lift_reqs_on_example_id"
   end
 
-  create_table "stats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "stats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "example_id"
     t.integer "likes", default: 0
     t.float "avg_rating", limit: 24
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20180510071109) do
     t.index ["example_id"], name: "index_stats_on_example_id"
   end
 
-  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "example_id"
     t.string "tag", null: false
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
